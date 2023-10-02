@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "50281341569",
+    "firebase_url": "https://fitstore-ec998-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "fitstore-ec998",
+    "storage_bucket": "fitstore-ec998.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:50281341569:android:1cca3346f4b380354be380",
+        "android_client_info": {
+          "package_name": "com.example.g05fitstore"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA1-50Hk_awN6u9U-RR5DaTIwr4VE7vC4A"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
