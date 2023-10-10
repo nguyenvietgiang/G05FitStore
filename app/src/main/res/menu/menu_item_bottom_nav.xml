@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:id="@+id/item_message"
+    <item android:id="@+id/item_home"
         android:title="Trang chủ"
         android:icon="@drawable/baseline_home_24"/>
-    <item android:id="@+id/action_group"
+    <item android:id="@+id/action_shop"
         android:title="Shop"
         android:icon="@drawable/baseline_shopping_cart_24"/>
-    <item android:id="@+id/item_profile"
+    <item android:id="@+id/item_supp"
         android:title="Hỗ trợ"
         android:icon="@drawable/baseline_contact_support_24"/>
 </menu>

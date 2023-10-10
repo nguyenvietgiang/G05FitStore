@@ -3,19 +3,22 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
+
     <com.google.android.material.bottomappbar.BottomAppBar
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:backgroundTint="@color/background"
-
         android:layout_gravity="bottom"
-        android:fitsSystemWindows="true">
+        android:background="@color/background"
+        android:fitsSystemWindows="true"
+        app:backgroundTint="@color/background">
+
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/bottom_nav_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:menu="@menu/menu_item_bottom_nav"
+            android:background="@color/background"
+            app:itemIconTint="@color/status_color_item_bottom_nav"
             app:itemTextColor="@color/status_color_item_bottom_nav"
-            app:itemIconTint="@color/status_color_item_bottom_nav" />
+            app:menu="@menu/menu_item_bottom_nav" />
     </com.google.android.material.bottomappbar.BottomAppBar>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
