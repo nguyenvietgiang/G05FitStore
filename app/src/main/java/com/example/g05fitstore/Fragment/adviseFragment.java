@@ -42,7 +42,15 @@ public class adviseFragment extends Fragment implements SensorEventListener {
     public void onSensorChanged(SensorEvent event) {
         float lightValue = event.values[0];
         textView.setText("Giá trị cảm biến ánh sáng: " + lightValue);
+        if (lightValue > 100) {
+            textView.setText("Ánh sáng quá mạnh, nó sẽ ảnh hướng xấu trong việc bảo quản nông sản.");
+        } else if (lightValue < 50) {
+            textView.setText("Ánh sáng quá yếu, nó sẽ ảnh hướng xấu trong việc bảo quản nông sản.");
+        } else {
+            textView.setText("Ánh sáng ở mức độ ổn định, phù hợp cho việc bảo quản nông sản.");
+        }
     }
+
 
     @Override
     public void onAccuracyChanged(Sensor sensor, int accuracy) {
