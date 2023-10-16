@@ -1,9 +1,16 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Base.Theme.G05FitStore" parent="Theme.Material3.DayNight.NoActionBar">
+    <style name="Theme.G05FitStore" parent="Theme.Material3.Dark.NoActionBar">
         <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+<!--         <item name="colorPrimary">@color/my_light_primary</item> -->
+        <item name="colorPrimaryDark">@color/background</item>
+        <item name="colorAccent">@color/item</item>
+        <item name="android:windowBackground">#ffffff</item>
+        <!-- Customize your theme here. -->
+
+        <item name="android:textColorPrimary">@color/primary_text</item>       <!--Màu chữ trong các control như Button ... -->
+        <item name="android:textColorSecondary">@color/item</item>
     </style>
 
-    <style name="Theme.G05FitStore" parent="Base.Theme.G05FitStore" />
+
 </resources>
