@@ -31,7 +31,9 @@ android {
 
 dependencies {
 
-    implementation("androidx.appcompat:appcompat:1.6.1")
+    //noinspection GradleCompatible
+    implementation("androidx.core:core:1.0.0")
+//
     implementation("com.google.android.material:material:1.9.0")
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
     implementation("com.google.firebase:firebase-database:20.2.2")
@@ -42,4 +44,8 @@ dependencies {
     implementation("com.google.firebase:firebase-analytics")
     // firebase authentication
     implementation ("com.google.firebase:firebase-auth:22.1.2")
+    implementation ("com.google.firebase:firebase-storage")
+
+    implementation ("de.hdodenhof:circleimageview:3.1.0")
+    implementation ("com.github.bumptech.glide:glide:4.8.0")
 }

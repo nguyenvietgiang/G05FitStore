@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center"
+    android:background="@color/background"
     android:orientation="vertical"
     tools:context=".Fragment.adviseFragment">
 
@@ -13,7 +14,7 @@
         android:layout_height="wrap_content"
         android:text="Bảo Quản nông sản"
         android:textSize="18sp"
-        android:textColor="@color/black"
+        android:textColor="@color/white"
         android:textStyle="bold" />
 
     <ImageView
@@ -28,6 +29,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Light"
-        android:textColor="@color/black" />
+        android:textColor="@color/white" />
 
 </LinearLayout>

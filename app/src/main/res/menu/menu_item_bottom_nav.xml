@@ -9,4 +9,7 @@
     <item android:id="@+id/item_supp"
         android:title="Hỗ trợ"
         android:icon="@drawable/baseline_contact_support_24"/>
+    <item android:id="@+id/item_profile"
+        android:title="Profile"
+        android:icon="@drawable/ic_users"/>
 </menu>

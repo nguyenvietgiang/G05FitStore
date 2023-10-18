@@ -15,6 +15,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.g05fitstore.Client.LoginActivity;
+import com.example.g05fitstore.Fragment.ProfileFragment;
 import com.example.g05fitstore.Fragment.adviseFragment;
 import com.example.g05fitstore.Models.Category;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -37,9 +38,14 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        addControls();
+        addEvents();
+    }
+
+    private void addControls() {
 
         auth = FirebaseAuth.getInstance();
-       // button = findViewById(R.id.logoutBtn);
+        // button = findViewById(R.id.logoutBtn);
         textView = findViewById(R.id.username);
         bottomNavigationView = findViewById(R.id.bottom_nav_view);
         user = auth.getCurrentUser();
@@ -54,16 +60,8 @@ public class MainActivity extends AppCompatActivity {
             Fragment fragment = new adviseFragment();
             loadFragment(fragment);
         }
-//        button.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                FirebaseAuth.getInstance().signOut();
-//                Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
-//                startActivities(new Intent[]{intent});
-//                finish();
-//            }
-//        });
     }
+
     private void addEvents() {
         eventBottomNavOnClick();
     }
@@ -81,12 +79,15 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
                 Fragment fragment = null;
-
                 if (menuItem.getItemId() == R.id.item_supp) {
                     fragment = new adviseFragment();
                     loadFragment(fragment);
                     return true;
-                } else {
+                } if(menuItem.getItemId() == R.id.item_profile){
+                    fragment = new ProfileFragment();
+                    loadFragment(fragment);
+                    return true;
+                }else {
                     return false;
                 }
             }
