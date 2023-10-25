@@ -95,7 +95,6 @@ public class ProductActivity extends AppCompatActivity {
         if (window == null) {
             return;
         }
-
         window.setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
         window.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
