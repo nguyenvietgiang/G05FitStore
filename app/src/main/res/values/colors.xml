@@ -9,6 +9,8 @@
     <color name="white">#FFFFFFFF</color>
 
     <!--    Custom Color   -->
+    <color name="primary_background">#6D77FB</color>
+    <color name="second_background">#75C052</color>
     <color name="background">#292b2f</color>
     <color name="primary_text">#9ea2a7</color>
     <color name="secondary_text">#3f4248</color>
@@ -16,4 +18,5 @@
     <color name="light_shadow">#31353a</color>
     <color name="light_icon">#9ca0a6</color>
     <color name="item">#4fc4f3</color>
+    <color name="transparent">#00FFFFFF</color>
 </resources>

@@ -1,50 +1,61 @@
 package com.example.g05fitstore.Models;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class Product {
-    public String Id;
-    public String Name;
-    public String Image;
-    public String Discription;
+    private String id;
+    private String name;
+    private String image;
+    private String desc;
 
-    public Product() {
+    public Product(String id, String name, String image, String desc) {
+        this.id = id;
+        this.name = name;
+        this.image = image;
+        this.desc = desc;
     }
+    public Product(){
 
-    public Product(String Id, String Name, String Image, String Discription) {
-        this.Id = Id;
-        this.Name = Name;
-        this.Image = Image;
-        this.Discription = Discription;
     }
 
     public String getId() {
-        return Id;
-    }
-
-    public void setId(String Id) {
-        this.Id = Id;
+        return id;
     }
 
     public String getName() {
-        return Name;
-    }
-
-    public void setName(String Name) {
-        this.Name = Name;
+        return name;
     }
 
     public String getImage() {
-        return Image;
+        return image;
     }
 
-    public void setImage(String Image) {
-        this.Image = Image;
+    public String getDesc() {
+        return desc;
     }
 
-    public String getDiscription() {
-        return Discription;
+    public void setId(String id) {
+        this.id = id;
     }
 
-    public void setDiscription(String Discription) {
-        this.Discription = Discription;
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
+    public void setDesc(String desc) {
+        this.desc = desc;
+    }
+    public Map<String, Object> toMap() {
+        HashMap<String, Object> result = new HashMap<>();
+        result.put("name", name);
+        result.put("desc", desc);
+        result.put("image", image);
+
+        return result;
     }
 }

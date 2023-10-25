@@ -105,11 +105,7 @@ public class ProfileFragment extends Fragment {
                 txtStudentCode.setText("Student code: "+studentCode);
                 txtSpecialized.setText("Specialized: "+user.getSpecialized());
                 txtEmail.setText("Email: "+email);
-                if(user.getAvatar().equals("default")){
-                    civAvatar.setImageResource(R.drawable.img_avatar_default);
-                }else{
-                    Glide.with(getContext()).load(user.getAvatar()).into(civAvatar);
-                }
+
             }
 
             @Override
