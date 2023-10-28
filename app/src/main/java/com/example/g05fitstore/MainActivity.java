@@ -15,6 +15,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.g05fitstore.Client.LoginActivity;
+import com.example.g05fitstore.Fragment.ProductFragment;
 import com.example.g05fitstore.Fragment.ProfileFragment;
 import com.example.g05fitstore.Fragment.adviseFragment;
 import com.example.g05fitstore.Models.Category;
@@ -83,11 +84,15 @@ public class MainActivity extends AppCompatActivity {
                     fragment = new adviseFragment();
                     loadFragment(fragment);
                     return true;
-                } if(menuItem.getItemId() == R.id.item_profile){
+                } else if(menuItem.getItemId() == R.id.item_profile){
                     fragment = new ProfileFragment();
                     loadFragment(fragment);
                     return true;
-                }else {
+                } else if(menuItem.getItemId() == R.id.item_home){
+                    fragment = new ProductFragment();
+                    loadFragment(fragment);
+                    return true;
+                } else {
                     return false;
                 }
             }

@@ -12,10 +12,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.MimeTypeMap;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.g05fitstore.Client.LoginActivity;
 import com.example.g05fitstore.Models.User;
 import com.example.g05fitstore.R;
 import androidx.annotation.NonNull;
@@ -46,12 +48,11 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class ProfileFragment extends Fragment {
     View viewProfile;
-
+    Button logoutbtn;
     CircleImageView civAvatar;
     TextView txtName, txtNickName, txtStudentCode, txtClassName;
     TextView txtAddress, txtSpecialized, txtEmail;
     ImageButton imbEditProfile;
-
     FirebaseUser firebaseUser;
     DatabaseReference databaseReference;
 
@@ -78,7 +79,7 @@ public class ProfileFragment extends Fragment {
         txtSpecialized = viewProfile.findViewById(R.id.txtSpecialized);
         imbEditProfile = viewProfile.findViewById(R.id.imbEditProfile);
         txtEmail = viewProfile.findViewById(R.id.txtEmail);
-
+        logoutbtn = viewProfile.findViewById(R.id.logoutbtn);
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         databaseReference = FirebaseDatabase.getInstance().getReference("Users").child(firebaseUser.getUid());
 
@@ -87,7 +88,15 @@ public class ProfileFragment extends Fragment {
     private void addEvents() {
         showInfor();// hien thông tin cua tài khoan
         setAvatarImage();
-
+        logoutbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FirebaseAuth.getInstance().signOut();
+                Intent intent = new Intent(getActivity(), LoginActivity.class);
+                startActivity(intent);
+                getActivity().finish();
+            }
+        });
     }
 
 

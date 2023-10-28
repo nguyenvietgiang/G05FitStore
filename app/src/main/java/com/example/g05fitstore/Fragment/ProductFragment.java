@@ -1,13 +1,4 @@
-package com.example.g05fitstore.Client;
-
-import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.contract.ActivityResultContracts;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.DividerItemDecoration;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
+package com.example.g05fitstore.Fragment;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -19,8 +10,20 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
+
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.webkit.MimeTypeMap;
@@ -32,6 +35,7 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.example.g05fitstore.Adaper.ProductAdaper;
+import com.example.g05fitstore.Client.ProductActivity;
 import com.example.g05fitstore.Models.Product;
 import com.example.g05fitstore.R;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -49,43 +53,41 @@ import com.google.firebase.storage.UploadTask;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ProductActivity extends AppCompatActivity {
+
+public class ProductFragment extends Fragment {
+    RecyclerView recyclerView;
     private ProductAdaper mProductAdaper;
     private List<Product> mListProducts;
     private EditText etId, etNameAdd, etDescAdd, etNameUpdate, etDescUpdate;
     private Button btnAddProductDialog, btnAddProduct, btnCloseAdd, btnUpdateProduct, btnCloseUpdate;
-
     private ImageView imageView;
+
     ActivityResultLauncher<Intent> imagePickLauncher;
     Uri selectedImageUri;
     final private StorageReference storageReference = FirebaseStorage
             .getInstance()
             .getReference("uploads");
-    public ProductActivity() {
-    }
-
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_product);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_product, container, false);
 
-        //Nhan anh
+        initUi(view);
+        getListProduct();
+
         imagePickLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(),
                 result -> {
                     if (result.getResultCode() == Activity.RESULT_OK){
                         Intent data = result.getData();
                         if (data!=null && data.getData()!=null){
                             selectedImageUri = data.getData();
-                            Glide.with(getApplicationContext()).load(selectedImageUri).apply(RequestOptions.circleCropTransform()).into(imageView);
+                            Glide.with(getContext()).load(selectedImageUri).apply(RequestOptions.circleCropTransform()).into(imageView);
                         }
                     } else {
-                        Toast.makeText(ProductActivity.this, "No Image Selected", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext(), "No Image Selected", Toast.LENGTH_SHORT).show();
                     }
                 }
         );
-
-        initUi();
-        getListProduct();
 
         btnAddProductDialog.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -94,19 +96,20 @@ public class ProductActivity extends AppCompatActivity {
             }
         });
 
+        return view;
     }
 
     // Hàm khởi tạo
-    private void initUi() {
-        RecyclerView rvProduct = findViewById(R.id.rv_product);
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+    private void initUi(View view) {
+        RecyclerView rvProduct = view.findViewById(R.id.rv_product);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         rvProduct.setLayoutManager(linearLayoutManager);
 
-        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(this, DividerItemDecoration.VERTICAL);
+        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL);
         rvProduct.addItemDecoration(dividerItemDecoration);
 
         mListProducts = new ArrayList<>();
-        mProductAdaper = new ProductAdaper(this,mListProducts, new ProductAdaper.IClickListener() {
+        mProductAdaper = new ProductAdaper(getContext(), mListProducts, new ProductAdaper.IClickListener() {
             @Override
             public void onClickUpdateItem(Product product) {
                 openUpdateProductDialog(product);
@@ -117,7 +120,7 @@ public class ProductActivity extends AppCompatActivity {
                 openDeleteProductAlert(product);
             }
         });
-        btnAddProductDialog = findViewById(R.id.btn_addProductDialog);
+        btnAddProductDialog = view.findViewById(R.id.btn_addProductDialog);
 
         rvProduct.setAdapter(mProductAdaper);
     }
@@ -125,7 +128,7 @@ public class ProductActivity extends AppCompatActivity {
 
     // Mở dialog thêm sản phẩm mới
     private void openAddProductDialog() {
-        final Dialog dialog = new Dialog(this);
+        final Dialog dialog = new Dialog(getContext());
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setContentView(R.layout.dialog_add_product);
 
@@ -145,7 +148,8 @@ public class ProductActivity extends AppCompatActivity {
         etDescAdd = dialog.findViewById(R.id.et_descAdd);
         btnAddProduct = dialog.findViewById(R.id.btn_addProduct);
         btnCloseAdd = dialog.findViewById(R.id.btn_closeAdd);
-        imageView  = dialog.findViewById(R.id.civ_ProductImage);
+        imageView = dialog.findViewById(R.id.civ_ProductImage);
+
 
 
         imageView.setOnClickListener(new View.OnClickListener() {
@@ -162,6 +166,7 @@ public class ProductActivity extends AppCompatActivity {
         btnAddProduct.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 final StorageReference imageReference = storageReference.child(System.currentTimeMillis() + "." + getFileExtension(selectedImageUri));
                 FirebaseDatabase database = FirebaseDatabase.getInstance();
                 DatabaseReference productRef = database.getReference().child("list_product");
@@ -182,7 +187,7 @@ public class ProductActivity extends AppCompatActivity {
                                 productRef.child(pathObject).setValue(product, new DatabaseReference.CompletionListener() {
                                     @Override
                                     public void onComplete(@Nullable DatabaseError error, @NonNull DatabaseReference ref) {
-                                        Toast.makeText(ProductActivity.this, "Thêm thành công !", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(getContext(), "Thêm thành công !", Toast.LENGTH_SHORT).show();
                                         dialog.dismiss();
                                     }
                                 });
@@ -200,6 +205,8 @@ public class ProductActivity extends AppCompatActivity {
 
                     }
                 });
+
+
             }
         });
         btnCloseAdd.setOnClickListener(new View.OnClickListener() {
@@ -213,7 +220,7 @@ public class ProductActivity extends AppCompatActivity {
     }
 
     private void openUpdateProductDialog(Product product) {
-        final Dialog dialog = new Dialog(this);
+        final Dialog dialog = new Dialog(getContext());
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setContentView(R.layout.dialog_update_product);
 
@@ -258,7 +265,7 @@ public class ProductActivity extends AppCompatActivity {
 
 
     private void openDeleteProductAlert(Product product) {
-        new AlertDialog.Builder(this)
+        new AlertDialog.Builder(getContext())
                 .setTitle(getString(R.string.app_name))
                 .setMessage("Bạn có chắc muốn xóa sản phẩm này không ?")
                 .setNegativeButton("OK", new DialogInterface.OnClickListener() {
@@ -270,7 +277,7 @@ public class ProductActivity extends AppCompatActivity {
                         productRef.child(String.valueOf(product.getId())).removeValue(new DatabaseReference.CompletionListener() {
                             @Override
                             public void onComplete(@Nullable DatabaseError error, @NonNull DatabaseReference ref) {
-                                Toast.makeText(ProductActivity.this, "Đã xóa sản phẩm", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getContext(), "Đã xóa sản phẩm", Toast.LENGTH_SHORT).show();
                             }
                         });
                     }
@@ -290,7 +297,7 @@ public class ProductActivity extends AppCompatActivity {
         productRef.child(String.valueOf(product.getId())).updateChildren(product.toMap(), new DatabaseReference.CompletionListener() {
             @Override
             public void onComplete(@Nullable DatabaseError error, @NonNull DatabaseReference ref) {
-                Toast.makeText(ProductActivity.this, "Cập nhật thành công !", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), "Cập nhật thành công !", Toast.LENGTH_SHORT).show();
                 dialog.dismiss();
             }
         });
@@ -352,9 +359,9 @@ public class ProductActivity extends AppCompatActivity {
             }
         });
     }
-    // lay duong dan anh
+
     private String getFileExtension(Uri fileUri){
-        ContentResolver contentResolver = getContentResolver();
+        ContentResolver contentResolver = getActivity().getContentResolver();
         MimeTypeMap mime = MimeTypeMap.getSingleton();
         return mime.getExtensionFromMimeType(contentResolver.getType(fileUri));
     }
