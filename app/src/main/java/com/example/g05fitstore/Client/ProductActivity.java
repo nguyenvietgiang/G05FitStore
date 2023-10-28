@@ -146,6 +146,7 @@ public class ProductActivity extends AppCompatActivity {
         btnAddProduct = dialog.findViewById(R.id.btn_addProduct);
         btnCloseAdd = dialog.findViewById(R.id.btn_closeAdd);
         imageView  = dialog.findViewById(R.id.civ_ProductImage);
+        //Test Git
 
 
         imageView.setOnClickListener(new View.OnClickListener() {
