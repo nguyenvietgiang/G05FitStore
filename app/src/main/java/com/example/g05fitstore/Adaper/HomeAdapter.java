@@ -37,8 +37,9 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeAdapterVie
     @Override
     public void onBindViewHolder(@NonNull HomeAdapterViewHolder holder, int position) {
         Product product = productList.get(position);
-        Glide.with(context).load(product.getImage()).apply(RequestOptions.circleCropTransform()).into(holder.imageView);
+        Glide.with(context).load(product.getImage()).into(holder.imageView);
         holder.caption.setText(product.getName());
+
     }
 
     @Override
