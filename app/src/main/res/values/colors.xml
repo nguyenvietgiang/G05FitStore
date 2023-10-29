@@ -19,4 +19,8 @@
     <color name="light_icon">#9ca0a6</color>
     <color name="item">#4fc4f3</color>
     <color name="transparent">#00FFFFFF</color>
+
+    <color name="light_gray">#C3C3C3</color>
+    <color name="grey_placeholder">#A8ABAF</color>
+    <color name="my_primary">#03A9F4</color>
 </resources>

@@ -15,6 +15,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.g05fitstore.Client.LoginActivity;
+import com.example.g05fitstore.Fragment.HomeFragment;
 import com.example.g05fitstore.Fragment.ProductFragment;
 import com.example.g05fitstore.Fragment.ProfileFragment;
 import com.example.g05fitstore.Fragment.adviseFragment;
@@ -58,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
         }else
         {
             textView.setText(user.getEmail());
-            Fragment fragment = new adviseFragment();
+            Fragment fragment = new HomeFragment();
             loadFragment(fragment);
         }
     }
@@ -88,11 +89,15 @@ public class MainActivity extends AppCompatActivity {
                     fragment = new ProfileFragment();
                     loadFragment(fragment);
                     return true;
-                } else if(menuItem.getItemId() == R.id.item_home){
+                } else if(menuItem.getItemId() == R.id.action_shop){
                     fragment = new ProductFragment();
                     loadFragment(fragment);
                     return true;
-                } else {
+                } else if(menuItem.getItemId() == R.id.item_home){
+                    fragment = new HomeFragment();
+                    loadFragment(fragment);
+                    return true;
+                }  else {
                     return false;
                 }
             }
