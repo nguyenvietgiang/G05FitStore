@@ -35,11 +35,11 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.example.g05fitstore.Adaper.ProductAdaper;
-import com.example.g05fitstore.Client.ProductActivity;
 import com.example.g05fitstore.Models.Product;
 import com.example.g05fitstore.R;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -178,10 +178,11 @@ public class ProductFragment extends Fragment {
                             @Override
                             public void onSuccess(Uri uri) {
                                 String id = productRef.push().getKey();
+                                String userId = FirebaseAuth.getInstance().getUid();
                                 String name = etNameAdd.getText().toString().trim();
                                 String image = uri.toString();
                                 String desc = etDescAdd.getText().toString().trim();
-                                Product product = new Product(id, name, image, desc);
+                                Product product = new Product(id, userId, name, image, desc);
 
                                 String pathObject = String.valueOf(product.getId());
                                 productRef.child(pathObject).setValue(product, new DatabaseReference.CompletionListener() {
@@ -262,8 +263,6 @@ public class ProductFragment extends Fragment {
         dialog.show();
     }
 
-
-
     private void openDeleteProductAlert(Product product) {
         new AlertDialog.Builder(getContext())
                 .setTitle(getString(R.string.app_name))
@@ -313,9 +312,12 @@ public class ProductFragment extends Fragment {
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
                 Product product = snapshot.getValue(Product.class);
                 if (product != null) {
-                    mListProducts.add(product);
-                    mProductAdaper.notifyDataSetChanged();
+                    if (product.getUserId().contains(FirebaseAuth.getInstance().getUid())){
+                        mListProducts.add(product);
+                        mProductAdaper.notifyDataSetChanged();
+                    }
                 }
+
             }
 
             @Override
