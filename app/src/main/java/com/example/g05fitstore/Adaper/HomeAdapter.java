@@ -14,6 +14,10 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.example.g05fitstore.Models.Product;
 import com.example.g05fitstore.R;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.List;
 
@@ -39,7 +43,18 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeAdapterVie
         Product product = productList.get(position);
         Glide.with(context).load(product.getImage()).into(holder.imageView);
         holder.caption.setText(product.getName());
-
+        FirebaseDatabase.getInstance().getReference("Users/"+product.getUserId())
+                .addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        Product product1 = snapshot.getValue(Product.class);
+                        String username =product1.getName();
+                        holder.username.setText(username);
+                    }
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+                    }
+                });
     }
 
     @Override
@@ -49,12 +64,13 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeAdapterVie
 
     public class HomeAdapterViewHolder extends RecyclerView.ViewHolder {
 
-        TextView caption;
+        TextView caption, username;
         ImageView imageView;
         public HomeAdapterViewHolder(@NonNull View itemView) {
             super(itemView);
             caption = itemView.findViewById(R.id.caption_tv);
             imageView = itemView.findViewById(R.id.image_view);
+            username = itemView.findViewById(R.id.username);
         }
     }
 }
