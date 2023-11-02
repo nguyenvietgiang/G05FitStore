@@ -1,6 +1,7 @@
 package com.example.g05fitstore.Adaper;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
+import com.example.g05fitstore.Client.DetailProductActivity;
 import com.example.g05fitstore.Models.Product;
 import com.example.g05fitstore.Models.User;
 import com.example.g05fitstore.R;
@@ -26,6 +28,7 @@ import java.util.List;
 
 public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeAdapterViewHolder>{
 
+    String username;
     Context context;
     List<Product> productList;
 
@@ -53,10 +56,21 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeAdapterVie
                     public void onComplete(@NonNull Task<DataSnapshot> task) {
                         DataSnapshot dataSnapshot = task.getResult();
                         User user = dataSnapshot.getValue(User.class);
-                        String username = user.getUserName();
+                        username = user.getUserName();
                         holder.username.setText(username);
                     }
                 });
+
+        holder.itemView.setOnClickListener(v -> {
+            Intent intent = new Intent(context, DetailProductActivity.class);
+            intent.putExtra("name", product.getName());
+            intent.putExtra("username", username);
+            intent.putExtra("image", product.getImage());
+            intent.putExtra("description", product.getDesc());
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            context.startActivity(intent);
+        });
+
     }
 
     @Override
