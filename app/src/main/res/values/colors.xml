@@ -6,12 +6,15 @@
     <color name="teal_200">#FF03DAC5</color>
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
+    <color name="color_171717">#171717</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="orange">#FF7042</color>
 
     <!--    Custom Color   -->
     <color name="primary_background">#6D77FB</color>
     <color name="second_background">#75C052</color>
-    <color name="background">#292b2f</color>
+    <color name="background">#F5F5F5</color>
+    <color name="cl_CCCCCC">#CCCCCC</color>
     <color name="primary_text">#9ea2a7</color>
     <color name="secondary_text">#3f4248</color>
     <color name="dark_shadow">#1f2326</color>

@@ -13,7 +13,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.example.g05fitstore.Models.Product;
+import com.example.g05fitstore.Models.User;
 import com.example.g05fitstore.R;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
@@ -44,15 +47,14 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeAdapterVie
         Glide.with(context).load(product.getImage()).into(holder.imageView);
         holder.caption.setText(product.getName());
         FirebaseDatabase.getInstance().getReference("Users/"+product.getUserId())
-                .addValueEventListener(new ValueEventListener() {
+                .get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
                     @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        Product product1 = snapshot.getValue(Product.class);
-                        String username =product1.getName();
+                    // lay ten nguoi dang tai
+                    public void onComplete(@NonNull Task<DataSnapshot> task) {
+                        DataSnapshot dataSnapshot = task.getResult();
+                        User user = dataSnapshot.getValue(User.class);
+                        String username = user.getUserName();
                         holder.username.setText(username);
-                    }
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
                     }
                 });
     }

@@ -30,7 +30,7 @@
                 android:layout_height="wrap_content"
                 android:text="Đăng Nhập"
                 android:textAlignment="center"
-                android:textColor="@color/background"
+                android:textColor="@color/color_171717"
                 android:textSize="36sp"
                 android:textStyle="bold" />
 
@@ -42,7 +42,7 @@
                 android:drawablePadding="8dp"
                 android:hint="Tài khoản"
                 android:padding="8dp"
-                android:textColor="@color/black"
+                android:textColor="@color/color_171717"
                 android:textColorHighlight="@color/cardview_dark_background" />
 
             <EditText
@@ -54,7 +54,7 @@
                 android:hint="Mật khẩu"
                 android:inputType="textPassword"
                 android:padding="8dp"
-                android:textColor="@color/black"
+                android:textColor="@color/color_171717"
                 android:textColorHighlight="@color/cardview_dark_background" />
 
             <Button
@@ -62,7 +62,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
                 android:layout_marginTop="30dp"
-                android:backgroundTint="@color/background"
+                android:backgroundTint="@color/color_171717"
                 android:text="Đăng nhập ngay"
                 android:textSize="18sp"
                 app:cornerRadius="20dp" />
@@ -84,7 +84,7 @@
         android:padding="8dp"
         android:text="Đăng ký một tài khoản mới"
         android:textAlignment="center"
-        android:textColor="@color/black"
+        android:textColor="@color/color_171717"
         android:textSize="14sp" />
 
 </LinearLayout>

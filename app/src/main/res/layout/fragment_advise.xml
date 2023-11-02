@@ -14,7 +14,7 @@
         android:layout_height="wrap_content"
         android:text="Bảo Quản nông sản"
         android:textSize="18sp"
-        android:textColor="@color/white"
+        android:textColor="@color/color_171717"
         android:textStyle="bold" />
 
     <ImageView
@@ -29,6 +29,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Light"
-        android:textColor="@color/white" />
+        android:textColor="@color/color_171717" />
 
 </LinearLayout>

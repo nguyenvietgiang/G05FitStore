@@ -33,6 +33,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
         android:gravity="center"
+        android:textColor="@color/color_171717"
         android:text="Tên sản phẩm"
         android:textSize="16sp"
         android:textStyle="bold" />
@@ -43,6 +44,8 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_margin="10dp"
+        android:textColor="@color/color_171717"
+        android:textSize="14sp"
         android:background="@drawable/bg_white_corner_10dp_border_gray"
         android:padding="12dp" />
 
@@ -61,6 +64,8 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_margin="10dp"
+        android:textColor="@color/color_171717"
+        android:textSize="14sp"
         android:background="@drawable/bg_white_corner_10dp_border_gray"
         android:padding="12dp" />
 
@@ -87,7 +92,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_weight="1"
-            android:backgroundTint="@color/background"
+            android:backgroundTint="@color/color_171717"
             android:text="Quay lại" />
     </LinearLayout>
 
