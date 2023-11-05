@@ -7,27 +7,112 @@
     android:orientation="vertical"
     tools:context=".Client.DetailProductActivity">
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/image_view"
+            android:layout_width="wrap_content"
+            android:layout_height="300dp"
+            android:layout_centerHorizontal="true"
+            android:layout_gravity="center"
+            android:foregroundGravity="center"
+            android:src="@drawable/img_product_default" />
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/civ_back"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/baseline_arrow_back_24"
+            android:background="@drawable/bg_circle"
+            android:layout_margin="15dp"
+            />
+    </RelativeLayout>
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="@color/grey_placeholder"/>
+
     <TextView
         android:id="@+id/product_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="San pham"
+        android:textSize="18dp"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="10dp"/>
+
+    <TextView
+        android:id="@+id/price"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="San pham"/>
+        android:textSize="36dp"
+        android:textStyle="bold"
+        android:textColor="@color/Price"
+        android:layout_marginStart="20dp"
+        android:text="20000 đ"/>
+
+
 
     <TextView
         android:id="@+id/username"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Ten nguoi dang"/>
+        android:text="Người bán: "
+        android:textSize="16dp"
+        android:layout_marginStart="20dp"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:background="#eee"
+        android:layout_marginTop="10dp"/>
+
 
     <TextView
         android:id="@+id/description"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Mo ta"/>
+        android:text="Mo ta"
+        android:layout_margin="20dp"
+        android:textSize="16dp"
+        android:layout_weight="1"/>
 
-    <ImageView
-        android:id="@+id/image_view"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="@color/grey_placeholder"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:gravity="fill_vertical"
+        android:orientation="horizontal">
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="5dp"
+            android:layout_weight="2"
+            android:text="Liên hệ với người bán"
+            android:textColor="@color/white"
+            android:backgroundTint="@color/grey_placeholder"/>
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_weight="3"
+            android:backgroundTint="@color/second_background"
+            android:text="Mua Hàng"/>
+    </LinearLayout>
+
+
+
 
 </LinearLayout>

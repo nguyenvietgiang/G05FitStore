@@ -140,7 +140,6 @@ public class RegisterActivity extends AppCompatActivity {
                     Toast.makeText(RegisterActivity.this, "Hãy nhập Password", Toast.LENGTH_SHORT).show();
                 }else {
                     register(username, email, password);
-
                 }
 
 

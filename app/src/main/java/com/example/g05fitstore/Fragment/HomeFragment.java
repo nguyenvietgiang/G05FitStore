@@ -21,6 +21,7 @@ import com.example.g05fitstore.Adaper.HomeAdapter;
 import com.example.g05fitstore.Adaper.ProductAdaper;
 import com.example.g05fitstore.Models.Product;
 import com.example.g05fitstore.R;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -91,8 +92,10 @@ public class HomeFragment extends Fragment {
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
                 Product product = snapshot.getValue(Product.class);
 //                if (product != null) {
-//                    productArrayList.add(product);
-//                    homeAdapter.notifyDataSetChanged();
+//                    if (product.getUserId().contains(FirebaseAuth.getInstance().getUid())){
+//                        productArrayList.add(0, product);
+//                        homeAdapter.notifyDataSetChanged();
+//                    }
 //                }
                 if (product == null || productArrayList == null || homeAdapter == null) {
                     return;

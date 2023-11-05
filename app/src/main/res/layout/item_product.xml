@@ -10,10 +10,13 @@
         android:layout_height="50dp"
         android:layout_alignParentStart="true"
         android:layout_centerHorizontal="true"
-        android:layout_margin="10dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="10dp"
         android:src="@drawable/img_product_default"
-        app:civ_border_color="@color/item"
-        app:civ_border_width="0.5dp" />
+        app:civ_border_color="@color/black"
+        app:civ_border_width="0.7dp" />
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -27,13 +30,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Rau Muống"
-            android:textStyle="bold" />
+            android:textStyle="bold"/>
 
         <TextView
             android:id="@+id/tv_desc"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Rau Muống tươi ngon mới hái" />
+            android:text="Rau Muống tươi ngon mới hái"
+            />
     </LinearLayout>
 
     <ImageButton
@@ -43,7 +47,9 @@
         android:layout_centerVertical="true"
         android:layout_marginEnd="10dp"
         android:layout_toLeftOf="@id/ibtn_Delete"
-        android:background="@drawable/update" />
+        android:background="@drawable/update"
+        app:civ_border_color="@color/black"
+        app:civ_border_width="1dp" />
 
     <ImageButton
         android:id="@+id/ibtn_Delete"
@@ -52,5 +58,7 @@
         android:layout_alignParentEnd="true"
         android:layout_centerVertical="true"
         android:layout_marginEnd="10dp"
-        android:background="@drawable/delete"/>
+        android:background="@drawable/delete"
+        app:civ_border_color="@color/black"
+        app:civ_border_width="0.5dp" />
 </RelativeLayout>

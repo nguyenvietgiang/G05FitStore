@@ -58,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
             finish();
         }else
         {
-            textView.setText(user.getEmail());
+            textView.setText("Xin chào "+ user.getEmail());
             Fragment fragment = new HomeFragment();
             loadFragment(fragment);
         }

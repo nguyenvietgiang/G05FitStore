@@ -30,7 +30,7 @@
             android:layout_toLeftOf="@+id/search_user_btn"
             android:background="@drawable/edit_text_rounded_corner"
             android:elevation="4dp"
-            android:hint="Username"
+            android:hint="Nhập sản phẩm cần tìm"
             android:padding="10dp"
             android:textColor="@color/color_171717"
             android:textColorHint="@color/grey_placeholder" />
@@ -45,8 +45,10 @@
             android:layout_marginTop="10dp"
             android:layout_marginEnd="10dp"
             android:layout_marginBottom="10dp"
+
             android:background="?attr/selectableItemBackgroundBorderless"
             android:padding="4dp"
+
             android:src="@drawable/search_icon"
             app:tint="@color/color_171717" />
 
