@@ -149,10 +149,20 @@
 
                 <Button
                     android:id="@+id/logoutbtn"
-                    android:layout_width="wrap_content"
+                    android:layout_width="150dp"
                     android:layout_height="wrap_content"
-                    android:background="#4fc4f3"
+                    android:backgroundTint="#E40D56"
                     android:text="Đăng xuất"
+                    android:layout_gravity="center_horizontal" />
+
+                <Button
+                    android:id="@+id/changepass"
+                    android:layout_marginTop="15px"
+                    android:layout_marginBottom="20dp"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="#4fc4f3"
+                    android:text="Đổi mật khẩu"
                     android:layout_gravity="center_horizontal" />
 
             </LinearLayout>

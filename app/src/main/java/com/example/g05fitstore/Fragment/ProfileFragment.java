@@ -19,6 +19,7 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.g05fitstore.Client.ChangePassActivity;
 import com.example.g05fitstore.Client.LoginActivity;
 import com.example.g05fitstore.Models.User;
 import com.example.g05fitstore.R;
@@ -50,7 +51,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class ProfileFragment extends Fragment {
     View viewProfile;
-    Button logoutbtn;
+    Button logoutbtn, changepass;
     CircleImageView civAvatar;
     TextView txtName, txtNickName, txtStudentCode, txtClassName;
     TextView txtAddress, txtSpecialized, txtEmail;
@@ -68,6 +69,8 @@ public class ProfileFragment extends Fragment {
         viewProfile = inflater.inflate(R.layout.fragment_profile, container, false);
         addControls();
         addEvents();
+        changepass.setOnClickListener(v -> startActivity(new Intent(getContext(), ChangePassActivity.class)));
+
         return viewProfile;
     }
 
@@ -82,6 +85,7 @@ public class ProfileFragment extends Fragment {
         imbEditProfile = viewProfile.findViewById(R.id.imbEditProfile);
         txtEmail = viewProfile.findViewById(R.id.txtEmail);
         logoutbtn = viewProfile.findViewById(R.id.logoutbtn);
+        changepass = viewProfile.findViewById(R.id.changepass);
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         databaseReference = FirebaseDatabase.getInstance().getReference("Users").child(firebaseUser.getUid());
 
@@ -90,6 +94,8 @@ public class ProfileFragment extends Fragment {
     private void addEvents() {
         showInfor();// hien thông tin cua tài khoan
         setAvatarImage();
+
+
         logoutbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -113,6 +119,7 @@ public class ProfileFragment extends Fragment {
                 AlertDialog dialog = builder.create();
                 dialog.show();
             }
+
         });
     }
 
