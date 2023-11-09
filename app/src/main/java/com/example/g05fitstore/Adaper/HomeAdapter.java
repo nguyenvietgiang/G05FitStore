@@ -49,6 +49,7 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeAdapterVie
         Product product = productList.get(position);
         Glide.with(context).load(product.getImage()).into(holder.imageView);
         holder.caption.setText(product.getName());
+        holder.price.setText(product.getPrice()+"");
         FirebaseDatabase.getInstance().getReference("Users/"+product.getUserId())
                 .get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
                     @Override
@@ -60,13 +61,14 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeAdapterVie
                         holder.username.setText(username);
                     }
                 });
-
+ // mở màn xem chi tiết sản phẩm
         holder.itemView.setOnClickListener(v -> {
             Intent intent = new Intent(context, DetailProductActivity.class);
             intent.putExtra("name", product.getName());
             intent.putExtra("username", username);
             intent.putExtra("image", product.getImage());
             intent.putExtra("description", product.getDesc());
+            intent.putExtra("price", product.getPrice()+"");
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             context.startActivity(intent);
         });
@@ -80,13 +82,14 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeAdapterVie
 
     public class HomeAdapterViewHolder extends RecyclerView.ViewHolder {
 
-        TextView caption, username;
+        TextView caption, username, price;
         ImageView imageView;
         public HomeAdapterViewHolder(@NonNull View itemView) {
             super(itemView);
             caption = itemView.findViewById(R.id.caption_tv);
             imageView = itemView.findViewById(R.id.image_view);
             username = itemView.findViewById(R.id.username);
+            price = itemView.findViewById(R.id.price);
         }
     }
 }

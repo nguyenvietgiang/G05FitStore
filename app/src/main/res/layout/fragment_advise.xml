@@ -23,12 +23,18 @@
         android:contentDescription="Sun Icon"
         android:src="@drawable/baseline_wb_sunny_24" />
 
+    <TextView
+        android:id="@+id/lightSensorNum"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Light"
+        android:textColor="@color/color_171717" />
 
     <TextView
         android:id="@+id/lightSensorTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Light"
+        android:text="Tư vấn cảm biến ánh sáng"
         android:textColor="@color/color_171717" />
 
 </LinearLayout>

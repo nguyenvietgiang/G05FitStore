@@ -20,6 +20,7 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -50,15 +51,17 @@ import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
-
 
 public class ProductFragment extends Fragment {
     RecyclerView recyclerView;
     private ProductAdaper mProductAdaper;
     private List<Product> mListProducts;
-    private EditText etId, etNameAdd, etDescAdd, etNameUpdate, etDescUpdate;
+    private EditText etId, etNameAdd, etDescAdd,etpriceAdd,etpriceUpdate, etNameUpdate , etDescUpdate;
     private Button btnAddProductDialog, btnAddProduct, btnCloseAdd, btnUpdateProduct, btnCloseUpdate;
     private ImageView imageView;
 
@@ -146,6 +149,7 @@ public class ProductFragment extends Fragment {
         dialog.setCancelable(true);
         etNameAdd = dialog.findViewById(R.id.et_nameAdd);
         etDescAdd = dialog.findViewById(R.id.et_descAdd);
+        etpriceAdd = dialog.findViewById(R.id.et_priceAdd);
         btnAddProduct = dialog.findViewById(R.id.btn_addProduct);
         btnCloseAdd = dialog.findViewById(R.id.btn_closeAdd);
         imageView = dialog.findViewById(R.id.civ_ProductImage);
@@ -166,50 +170,69 @@ public class ProductFragment extends Fragment {
         btnAddProduct.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                String name = etNameAdd.getText().toString().trim();
+                String desc = etDescAdd.getText().toString().trim();
+                String price = etpriceAdd.getText().toString().trim();
 
-                final StorageReference imageReference = storageReference.child(System.currentTimeMillis() + "." + getFileExtension(selectedImageUri));
-                FirebaseDatabase database = FirebaseDatabase.getInstance();
-                DatabaseReference productRef = database.getReference().child("list_product");
+                if (name.isEmpty() || desc.isEmpty() || price.isEmpty() || selectedImageUri == null) {
+                    // Hiển thị thông báo nếu các trường hoặc hình ảnh không được điền đầy đủ
+                    Toast.makeText(getContext(), "Vui lòng điền đầy đủ thông tin và chọn hình ảnh.", Toast.LENGTH_SHORT).show();
+                } else if (!TextUtils.isDigitsOnly(price)) {
+                    // Hiển thị thông báo nếu giá không hợp lệ (không phải là số)
+                    Toast.makeText(getContext(), "Giá nhập vào phải là số.", Toast.LENGTH_SHORT).show();
+                } else {
+                    // Tiếp tục thực hiện các thao tác khi các trường thỏa mãn yêu cầu
+                    final StorageReference imageReference = storageReference.child(System.currentTimeMillis() + "." + getFileExtension(selectedImageUri));
+                    FirebaseDatabase database = FirebaseDatabase.getInstance();
+                    DatabaseReference productRef = database.getReference().child("list_product");
+                    imageReference.putFile(selectedImageUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                        @Override
+                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                            imageReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                                @Override
+                                public void onSuccess(Uri uri) {
+                                    String id = productRef.push().getKey();
+                                    String userId = FirebaseAuth.getInstance().getUid();
+                                    String name = etNameAdd.getText().toString().trim();
+                                    String image = uri.toString();
+                                    String desc = etDescAdd.getText().toString().trim();
+                                    Integer price = Integer.parseInt(etpriceAdd.getText().toString().trim());
+                                    Product product = new Product(id, userId, name, image, desc,price);
 
-                imageReference.putFile(selectedImageUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                    @Override
-                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                        imageReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                            @Override
-                            public void onSuccess(Uri uri) {
-                                String id = productRef.push().getKey();
-                                String userId = FirebaseAuth.getInstance().getUid();
-                                String name = etNameAdd.getText().toString().trim();
-                                String image = uri.toString();
-                                String desc = etDescAdd.getText().toString().trim();
-                                Product product = new Product(id, userId, name, image, desc);
+                                    String pathObject = String.valueOf(product.getId());
+                                    productRef.child(pathObject).setValue(product, new DatabaseReference.CompletionListener() {
+                                        @Override
+                                        public void onComplete(@Nullable DatabaseError error, @NonNull DatabaseReference ref) {
+                                            if (error != null) {
+                                                // Hiển thị thông báo nếu thêm sản phẩm thất bại
+                                                Toast.makeText(getContext(), "Thêm sản phẩm thất bại!", Toast.LENGTH_SHORT).show();
+                                            } else {
+                                                // Hiển thị thông báo nếu thêm sản phẩm thành công
+                                                Toast.makeText(getContext(), "Thêm thành công!", Toast.LENGTH_SHORT).show();
+                                            }
+                                            dialog.dismiss();
+                                        }
+                                    });
+                                }
+                            });
+                        }
+                    }).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
+                        @Override
+                        public void onProgress(@NonNull UploadTask.TaskSnapshot snapshot) {
 
-                                String pathObject = String.valueOf(product.getId());
-                                productRef.child(pathObject).setValue(product, new DatabaseReference.CompletionListener() {
-                                    @Override
-                                    public void onComplete(@Nullable DatabaseError error, @NonNull DatabaseReference ref) {
-                                        Toast.makeText(getContext(), "Thêm thành công !", Toast.LENGTH_SHORT).show();
-                                        dialog.dismiss();
-                                    }
-                                });
-                            }
-                        });
-                    }
-                }).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
-                    @Override
-                    public void onProgress(@NonNull UploadTask.TaskSnapshot snapshot) {
-
-                    }
-                }).addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-
-                    }
-                });
-
-
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            // Hiển thị thông báo nếu việc tải lên hình ảnh thất bại
+                            Toast.makeText(getContext(), "Tải lên hình ảnh thất bại!", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                }
             }
         });
+
+
         btnCloseAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -240,12 +263,13 @@ public class ProductFragment extends Fragment {
 
         etNameUpdate = dialog.findViewById(R.id.et_nameUpdate);
         etDescUpdate = dialog.findViewById(R.id.et_descUpdate);
+        etpriceUpdate = dialog.findViewById(R.id.et_priceUpdate);
         btnUpdateProduct = dialog.findViewById(R.id.btn_UpdateProduct);
         btnCloseUpdate = dialog.findViewById(R.id.btn_closeUpdate);
 
         etNameUpdate.setText(product.getName());
         etDescUpdate.setText(product.getDesc());
-
+        etpriceUpdate.setText(product.getPrice()+""); // thêm +"" vì là int
         btnCloseUpdate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -291,8 +315,10 @@ public class ProductFragment extends Fragment {
 
         String newName = etNameUpdate.getText().toString().trim();
         String newDesc = etDescUpdate.getText().toString().trim();
+        Integer newPrice =  Integer.parseInt(etpriceUpdate.getText().toString().trim());
         product.setName(newName);
         product.setDesc(newDesc);
+        product.setPrice(newPrice);
         productRef.child(String.valueOf(product.getId())).updateChildren(product.toMap(), new DatabaseReference.CompletionListener() {
             @Override
             public void onComplete(@Nullable DatabaseError error, @NonNull DatabaseReference ref) {

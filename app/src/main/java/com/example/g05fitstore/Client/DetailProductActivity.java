@@ -33,8 +33,7 @@ public class DetailProductActivity extends AppCompatActivity {
         tvProductName.setText(getIntent().getStringExtra("name"));
         tvUser.setText(tvUser.getText() + getIntent().getStringExtra("username"));
         tvDetailDesc.setText(getIntent().getStringExtra("description"));
-//        tvPrice.setText(getIntent().getStringExtra("price")+ " đ");
-        tvPrice.setText("20000" + " đ");
+        tvPrice.setText(getIntent().getStringExtra("price")+ " đ");
         Glide.with(this).load(getIntent().getStringExtra("image")).into(ivDetail);
 
         // Nut tro lai

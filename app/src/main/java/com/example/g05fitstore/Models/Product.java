@@ -1,6 +1,6 @@
 package com.example.g05fitstore.Models;
 
-import java.sql.Timestamp;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -10,24 +10,18 @@ public class Product {
     private String name;
     private String image;
     private String desc;
-    private Timestamp time;
+    private Integer price;
 
-    public Product(String id, String userId, String name, String image, String desc) {
+
+    public Product(String id, String userId, String name, String image, String desc, Integer price) {
         this.id = id;
         this.userId = userId;
         this.name = name;
         this.image = image;
         this.desc = desc;
+        this.price = price;
     }
 
-    public Product(String id, String userId, String name, String image, String desc, Timestamp time) {
-        this.id = id;
-        this.userId = userId;
-        this.name = name;
-        this.image = image;
-        this.desc = desc;
-        this.time = time;
-    }
 
     public Product(){
 
@@ -73,12 +67,13 @@ public class Product {
         this.desc = desc;
     }
 
-    public Timestamp getTime() {
-        return time;
+
+    public Integer getPrice() {
+        return price;
     }
 
-    public void setTime(Timestamp time) {
-        this.time = time;
+    public void setPrice(Integer price) {
+        this.price = price;
     }
 
     public Map<String, Object> toMap() {
@@ -86,7 +81,7 @@ public class Product {
         result.put("name", name);
         result.put("desc", desc);
         result.put("image", image);
-
+        result.put("price",price);
         return result;
     }
 }
