@@ -20,6 +20,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.g05fitstore.Client.ChangePassActivity;
+import com.example.g05fitstore.Client.EditProfileActivity;
 import com.example.g05fitstore.Client.LoginActivity;
 import com.example.g05fitstore.Models.User;
 import com.example.g05fitstore.R;
@@ -51,7 +52,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class ProfileFragment extends Fragment {
     View viewProfile;
-    Button logoutbtn, changepass;
+    Button logoutbtn, changepass , chaneprofile;
     CircleImageView civAvatar;
     TextView txtName, txtNickName, txtStudentCode, txtClassName;
     TextView txtAddress, txtSpecialized, txtEmail;
@@ -70,7 +71,7 @@ public class ProfileFragment extends Fragment {
         addControls();
         addEvents();
         changepass.setOnClickListener(v -> startActivity(new Intent(getContext(), ChangePassActivity.class)));
-
+        chaneprofile.setOnClickListener(v -> startActivity(new Intent(getContext(), EditProfileActivity.class)));;
         return viewProfile;
     }
 
@@ -86,16 +87,14 @@ public class ProfileFragment extends Fragment {
         txtEmail = viewProfile.findViewById(R.id.txtEmail);
         logoutbtn = viewProfile.findViewById(R.id.logoutbtn);
         changepass = viewProfile.findViewById(R.id.changepass);
+        chaneprofile =  viewProfile.findViewById(R.id.changeprofile);
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         databaseReference = FirebaseDatabase.getInstance().getReference("Users").child(firebaseUser.getUid());
-
         storageReference = FirebaseStorage.getInstance().getReference("uploads");
     }
     private void addEvents() {
         showInfor();// hien thông tin cua tài khoan
         setAvatarImage();
-
-
         logoutbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -123,7 +122,6 @@ public class ProfileFragment extends Fragment {
         });
     }
 
-
     private void showInfor(){
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
@@ -133,14 +131,12 @@ public class ProfileFragment extends Fragment {
                 String studentCode = email.substring(0,email.indexOf("@"));
                 txtName.setText(user.getUserName());
                 txtNickName.setText("@"+user.getNickName());
-                txtAddress.setText("Address: "+user.getAddress());
-                txtClassName.setText("Classname: "+user.getClassName());
-                txtStudentCode.setText("Student code: "+studentCode);
-                txtSpecialized.setText("Specialized: "+user.getSpecialized());
+                txtAddress.setText("Địa Chỉ: "+user.getAddress());
+                txtClassName.setText("Số điện thoại: "+user.getClassName());
+                txtStudentCode.setText("Tên tài khoản: "+studentCode);
+                txtSpecialized.setText("Chi tiết: "+user.getSpecialized());
                 txtEmail.setText("Email: "+email);
-
             }
-
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
 

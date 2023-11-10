@@ -146,13 +146,14 @@
                     android:text="Email: username@gmail.com"
                     android:textColor="@color/primary_text"
                     android:padding="10dp"/>
-
                 <Button
-                    android:id="@+id/logoutbtn"
+                    android:id="@+id/changeprofile"
+                    android:layout_marginTop="15px"
+                    android:layout_marginBottom="20dp"
                     android:layout_width="150dp"
                     android:layout_height="wrap_content"
-                    android:backgroundTint="#E40D56"
-                    android:text="Đăng xuất"
+                    android:backgroundTint="#9C27B0"
+                    android:text="Đổi thông tin"
                     android:layout_gravity="center_horizontal" />
 
                 <Button
@@ -163,6 +164,14 @@
                     android:layout_height="wrap_content"
                     android:backgroundTint="#4fc4f3"
                     android:text="Đổi mật khẩu"
+                    android:layout_gravity="center_horizontal" />
+
+                <Button
+                    android:id="@+id/logoutbtn"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="#E40D56"
+                    android:text="Đăng xuất"
                     android:layout_gravity="center_horizontal" />
 
             </LinearLayout>
