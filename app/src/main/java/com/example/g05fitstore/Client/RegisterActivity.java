@@ -77,9 +77,7 @@ public class RegisterActivity extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             FirebaseUser firebaseUser = mAuth.getCurrentUser();
                             String userID = firebaseUser.getUid();
-
                             databaseReference = FirebaseDatabase.getInstance().getReference("Users").child(userID);
-
                             HashMap<String, String> hashMap = new HashMap<>();
                             hashMap.put("userID",userID);
                             hashMap.put("userName", username);
@@ -91,33 +89,17 @@ public class RegisterActivity extends AppCompatActivity {
                             hashMap.put("className","Chưa cập nhập");
                             hashMap.put("address","Chưa cập nhập");
                             hashMap.put("specialized","Chưa cập nhập");
-
-
                             //ghi dữ liệu user
                             databaseReference.setValue(hashMap).addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override
                                 public void onComplete(@NonNull Task<Void> task) {
                                     if(task.isSuccessful()){
-//                                        Intent intent  = new Intent(RegisterActivity.this, MainActivity.class);
-//                                        //khi hoạt động bắt đầu, tất cả các hoạt động khác hiện tại sẽ bị hủy bỏ
-//                                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-//                                        startActivity(intent);
-                                        finish();
+                                        Toast.makeText(RegisterActivity.this, "Đăng ký tài khoản thành công.",
+                                           Toast.LENGTH_SHORT).show();
                                     }
                                 }
                             });
-
-
-                            // Sign in success, update UI with the signed-in user's information
-                            // FirebaseUser user = mAuth.getCurrentUser();
-                            Toast.makeText(RegisterActivity.this, "Đăng ký thành công.",
-                                    Toast.LENGTH_SHORT).show();
-
-//                            Intent intent = new Intent(RegisterActivity.this, MyProfileActivity.class);
-//                            intent.putExtra("KEYUSER",userID );
-//                            startActivity(intent);
                         } else {
-                            // If sign in fails, display a message to the user.
                             Toast.makeText(RegisterActivity.this, "Đăng ký thất bại.",
                                     Toast.LENGTH_SHORT).show();
                         }

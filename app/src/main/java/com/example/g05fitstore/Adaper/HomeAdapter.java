@@ -61,13 +61,15 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeAdapterVie
                         holder.username.setText(username);
                     }
                 });
- // mở màn xem chi tiết sản phẩm
+ // mở màn xem chi tiết sản phẩm và truyền thông tin sang
         holder.itemView.setOnClickListener(v -> {
             Intent intent = new Intent(context, DetailProductActivity.class);
             intent.putExtra("name", product.getName());
             intent.putExtra("username", username);
             intent.putExtra("image", product.getImage());
             intent.putExtra("description", product.getDesc());
+            intent.putExtra("sellerid",product.getUserId());
+            intent.putExtra("productId", product.getId());
             intent.putExtra("price", product.getPrice()+"");
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             context.startActivity(intent);

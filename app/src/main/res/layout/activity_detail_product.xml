@@ -104,6 +104,7 @@
             android:textColor="@color/white"
             android:backgroundTint="@color/grey_placeholder"/>
         <Button
+            android:id="@+id/btn_buy"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
