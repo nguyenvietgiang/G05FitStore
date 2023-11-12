@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.g05fitstore.Models.User;
@@ -16,7 +17,8 @@ import com.google.firebase.database.FirebaseDatabase;
 
 public class EditProfileActivity extends AppCompatActivity {
     private EditText editTextUserName, editTextNickName, editTextAddress, editTextPhone;
-    private Button btnSave,btnBack;
+    private TextView btnBack;
+    private Button btnSave;
 
     private FirebaseAuth mAuth;
     private DatabaseReference mDatabase;
