@@ -16,6 +16,10 @@ public class Transaction {
         this.totalValue = totalValue;
     }
 
+    // Constructor không tham số
+    public Transaction() {
+    }
+
     // Getters and Setters
     public String getTransactionId() {
         return transactionId;
