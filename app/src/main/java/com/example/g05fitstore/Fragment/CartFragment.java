@@ -72,7 +72,7 @@ public class CartFragment extends Fragment {
                 shoppingCartAdapter.notifyDataSetChanged();
 
                 double totalAmount = shoppingCartAdapter.getTotalAmount();
-                totalAmountTextView.setText(String.valueOf(totalAmount));
+                totalAmountTextView.setText(totalAmountTextView.getText() + String.valueOf(totalAmount));
             }
 
             @Override
