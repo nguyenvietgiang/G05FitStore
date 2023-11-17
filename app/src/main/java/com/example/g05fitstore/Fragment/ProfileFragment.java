@@ -24,6 +24,7 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.example.g05fitstore.Client.ChangePassActivity;
 import com.example.g05fitstore.Client.EditProfileActivity;
 import com.example.g05fitstore.Client.LoginActivity;
@@ -179,6 +180,11 @@ public class ProfileFragment extends Fragment {
                 txtStudentCode.setText("Tên tài khoản: "+studentCode);
                 txtSpecialized.setText("Chi tiết: "+user.getSpecialized());
                 txtEmail.setText("Email: "+email);
+                if(user.getAvatar().equals("default")){
+                    civAvatar.setImageResource(R.drawable.img_avatar_default);
+                }else{
+                    Glide.with(getContext()).load(user.getAvatar()).into(civAvatar);
+                }
             }
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
