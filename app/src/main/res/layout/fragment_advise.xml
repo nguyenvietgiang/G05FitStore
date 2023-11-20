@@ -37,4 +37,23 @@
         android:text="Tư vấn cảm biến ánh sáng"
         android:textColor="@color/color_171717" />
 
+
+    <EditText
+        android:id="@+id/temperatureTextView"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:textSize="18sp"
+        android:hint="hien"
+        />
+
+    <TextView
+        android:id="@+id/temperSensorTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Tư vấn cảm biến nhiệt"
+        android:textSize="18sp"
+        android:layout_below="@+id/temperatureTextView"
+        />
+
 </LinearLayout>

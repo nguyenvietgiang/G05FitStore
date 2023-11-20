@@ -49,4 +49,5 @@ dependencies {
 
     implementation ("de.hdodenhof:circleimageview:3.1.0")
     implementation ("com.github.bumptech.glide:glide:4.8.0")
+    androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
 }
