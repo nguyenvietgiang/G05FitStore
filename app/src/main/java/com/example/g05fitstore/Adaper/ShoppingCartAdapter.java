@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
+import com.example.g05fitstore.Client.ICartSum;
 import com.example.g05fitstore.Models.Product;
 import com.example.g05fitstore.Models.Transaction;
 import com.example.g05fitstore.R;
@@ -22,9 +23,11 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.PrimitiveIterator;
 
 public class ShoppingCartAdapter extends RecyclerView.Adapter<ShoppingCartAdapter.ViewHolder> {
 
@@ -33,23 +36,38 @@ public class ShoppingCartAdapter extends RecyclerView.Adapter<ShoppingCartAdapte
     private Map<String, Product> productMap;
     private RecyclerView recyclerView;
     private Context context;
+    private ICartSum _cartSum;
 
-    public ShoppingCartAdapter(List<Transaction> transactionList, RecyclerView recyclerView,Context context) {
+    private ArrayList<Product> mListProduct;
+    private ArrayList<Product> mListProductSame;
+
+    public ShoppingCartAdapter(List<Transaction> transactionList, RecyclerView recyclerView, Context context, ICartSum iCartSum) {
         this.transactionList = transactionList;
         this.productMap = new HashMap<>();
         this.recyclerView = recyclerView;
         this.context = context;
+        this._cartSum = iCartSum;
+        this.mListProduct = new ArrayList<>();
+        this.mListProductSame = new ArrayList<>();
     }
 
     public double calculateTotal() {
-        totalAmount = 0.0;
-        for (Transaction transaction : transactionList) {
-            Product product = productMap.get(transaction.getProductId());
-            if (product != null) {
-                totalAmount += product.getPrice();
-            }
+        filterList();
+        for (Product pr: mListProductSame){
+            totalAmount += pr.getPrice();
         }
         return totalAmount;
+    }
+
+    public ArrayList<Product> filterList(){
+        for (Transaction transaction : transactionList) {
+            for (Product mList: mListProduct){
+                if (transaction.getProductId().equals(mList.getId())){
+                    mListProductSame.add(mList);
+                }
+            }
+        }
+        return mListProductSame;
     }
 
     public double getTotalAmount() {
@@ -101,11 +119,16 @@ public class ShoppingCartAdapter extends RecyclerView.Adapter<ShoppingCartAdapte
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()) {
+
                     Product product = dataSnapshot.getValue(Product.class);
                     if (product != null) {
+                        mListProduct.add(product);
                         holder.ProductNameTextView.setText(product.getName());
                         holder.ProductPriceTextView.setText(String.valueOf(product.getPrice()));
                         Glide.with(context).load(product.getImage()).apply(RequestOptions.circleCropTransform()).into(holder.imageView);
+                        if (!transactionList.isEmpty()) {
+                            _cartSum.cartSum();
+                        }
                     }
                 }
             }

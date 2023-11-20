@@ -11,6 +11,8 @@ import android.widget.TextView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.g05fitstore.Client.ICartSum;
 import com.google.firebase.auth.FirebaseAuth;
 import com.example.g05fitstore.Adaper.ShoppingCartAdapter;
 import com.example.g05fitstore.Models.Transaction;
@@ -24,7 +26,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CartFragment extends Fragment {
+public class CartFragment extends Fragment implements ICartSum {
 
     private RecyclerView recyclerView;
     private ShoppingCartAdapter shoppingCartAdapter;
@@ -44,7 +46,7 @@ public class CartFragment extends Fragment {
         totalAmountTextView = view.findViewById(R.id.total_amount_text_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         transactionList = new ArrayList<>();
-        shoppingCartAdapter = new ShoppingCartAdapter(transactionList, recyclerView, getContext()); // Sửa dòng này
+        shoppingCartAdapter = new ShoppingCartAdapter(transactionList, recyclerView, getContext(), this::cartSum);
         recyclerView.setAdapter(shoppingCartAdapter);
         String buyerId = FirebaseAuth.getInstance().getUid();
         if (buyerId != null) {
@@ -70,15 +72,23 @@ public class CartFragment extends Fragment {
                 }
 
                 shoppingCartAdapter.notifyDataSetChanged();
-
-                double totalAmount = shoppingCartAdapter.getTotalAmount();
-                totalAmountTextView.setText(String.valueOf(totalAmount));
+//                // Kiểm tra nếu transactionList đã được cập nhật, sau đó tính tổng
+//                if (!transactionList.isEmpty()) {
+//                    double totalAmount = shoppingCartAdapter.getTotalAmount();
+//                    totalAmountTextView.setText(String.valueOf(totalAmount));
+//                }
             }
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
-
+                // Xử lý lỗi
             }
         });
+    }
+
+    @Override
+    public void cartSum() {
+        double totalAmount = shoppingCartAdapter.getTotalAmount();
+        totalAmountTextView.setText(String.valueOf(totalAmount));
     }
 }

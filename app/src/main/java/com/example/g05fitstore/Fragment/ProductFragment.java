@@ -343,7 +343,6 @@ public class ProductFragment extends Fragment {
                         mProductAdaper.notifyDataSetChanged();
                     }
                 }
-
             }
 
             @Override

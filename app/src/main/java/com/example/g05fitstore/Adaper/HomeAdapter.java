@@ -49,7 +49,7 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeAdapterVie
         Product product = productList.get(position);
         Glide.with(context).load(product.getImage()).into(holder.imageView);
         holder.caption.setText(product.getName());
-        holder.price.setText(product.getPrice()+"");
+        holder.price.setText("Giá: " + product.getPrice()+" đồng");
         FirebaseDatabase.getInstance().getReference("Users/"+product.getUserId())
                 .get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
                     @Override
@@ -58,7 +58,7 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeAdapterVie
                         DataSnapshot dataSnapshot = task.getResult();
                         User user = dataSnapshot.getValue(User.class);
                         username = user.getUserName();
-                        holder.username.setText(username);
+                        holder.username.setText("Người đăng: " + username);
                     }
                 });
  // mở màn xem chi tiết sản phẩm và truyền thông tin sang

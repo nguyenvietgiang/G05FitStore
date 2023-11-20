@@ -76,7 +76,7 @@
 
     <TextView
         android:id="@+id/description"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Mo ta"
         android:layout_margin="20dp"
@@ -91,26 +91,30 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="20dp"
-        android:gravity="fill_vertical"
+        android:layout_margin="10dp"
+        android:gravity="center"
         android:orientation="horizontal">
 
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginRight="5dp"
-            android:layout_weight="2"
+            android:layout_weight="4"
             android:text="Liên hệ với người bán"
             android:textColor="@color/white"
+            app:cornerRadius="8dp"
+            android:textSize="16sp"
             android:backgroundTint="@color/grey_placeholder"/>
         <Button
             android:id="@+id/btn_buy"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
-            android:layout_weight="3"
+            android:layout_weight="7"
             android:backgroundTint="@color/second_background"
-            android:text="Mua Hàng"/>
+            android:text="Mua Hàng"
+            app:cornerRadius="8dp"
+            android:textSize="16sp"/>
     </LinearLayout>
 
 

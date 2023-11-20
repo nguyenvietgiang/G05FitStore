@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -14,12 +15,33 @@
         android:layout_weight="1"
         tools:listitem="@layout/item_cart_product" />
 
-    <!-- TextView to display total amount -->
-    <TextView
-        android:id="@+id/total_amount_text_view"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="16dp"
-        android:text="Total: $0.00" />
+        android:layout_height="70dp"
+        android:layout_marginBottom="20dp"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <!-- TextView to display total amount -->
+        <TextView
+            android:id="@+id/total_amount_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:padding="16dp"
+            android:text="Tổng: "
+            android:textSize="20sp" />
+
+        <Button
+            android:id="@+id/payment_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginEnd="20dp"
+            android:backgroundTint="@color/second_background"
+            android:text="Thanh toán"
+            android:textColor="@color/white"
+            app:cornerRadius="8dp" />
+    </LinearLayout>
 
 </LinearLayout>

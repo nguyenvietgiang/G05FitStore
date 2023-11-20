@@ -3,22 +3,28 @@ package com.example.g05fitstore.Fragment;
 import static android.app.Activity.RESULT_OK;
 
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.ContentResolver;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
 import android.webkit.MimeTypeMap;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.example.g05fitstore.Client.ChangePassActivity;
 import com.example.g05fitstore.Client.EditProfileActivity;
 import com.example.g05fitstore.Client.LoginActivity;
@@ -28,7 +34,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -52,11 +57,11 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class ProfileFragment extends Fragment {
     View viewProfile;
-    Button logoutbtn, changepass , chaneprofile;
+    Button logoutbtn, changepass , chaneprofile, btnClose;
     CircleImageView civAvatar;
     TextView txtName, txtNickName, txtStudentCode, txtClassName;
     TextView txtAddress, txtSpecialized, txtEmail;
-    ImageButton imbEditProfile;
+    ImageButton imbOptionProfile;
     FirebaseUser firebaseUser;
     DatabaseReference databaseReference;
 
@@ -70,8 +75,12 @@ public class ProfileFragment extends Fragment {
         viewProfile = inflater.inflate(R.layout.fragment_profile, container, false);
         addControls();
         addEvents();
-        changepass.setOnClickListener(v -> startActivity(new Intent(getContext(), ChangePassActivity.class)));
-        chaneprofile.setOnClickListener(v -> startActivity(new Intent(getContext(), EditProfileActivity.class)));;
+        imbOptionProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openOptionDialog();
+            }
+        });
         return viewProfile;
     }
 
@@ -83,18 +92,39 @@ public class ProfileFragment extends Fragment {
         txtClassName = viewProfile.findViewById(R.id.txtClassName);
         txtAddress = viewProfile.findViewById(R.id.txtAddress);
         txtSpecialized = viewProfile.findViewById(R.id.txtSpecialized);
-        imbEditProfile = viewProfile.findViewById(R.id.imbEditProfile);
+        imbOptionProfile = viewProfile.findViewById(R.id.imbOption);
         txtEmail = viewProfile.findViewById(R.id.txtEmail);
-        logoutbtn = viewProfile.findViewById(R.id.logoutbtn);
-        changepass = viewProfile.findViewById(R.id.changepass);
-        chaneprofile =  viewProfile.findViewById(R.id.changeprofile);
+
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         databaseReference = FirebaseDatabase.getInstance().getReference("Users").child(firebaseUser.getUid());
         storageReference = FirebaseStorage.getInstance().getReference("uploads");
     }
-    private void addEvents() {
-        showInfor();// hien thông tin cua tài khoan
-        setAvatarImage();
+
+    private void openOptionDialog() {
+        final Dialog dialog = new Dialog(getContext());
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.dialog_option_profile);
+
+        Window window = dialog.getWindow();
+        if (window == null) {
+            return;
+        }
+
+        window.setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
+        window.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
+        WindowManager.LayoutParams windowAttributes = window.getAttributes();
+        windowAttributes.gravity = Gravity.CENTER;
+        window.setAttributes(windowAttributes);
+        dialog.setCancelable(true);
+
+        btnClose = dialog.findViewById(R.id.btn_closeOption);
+        logoutbtn = dialog.findViewById(R.id.logoutbtn);
+        changepass = dialog.findViewById(R.id.changepass);
+        chaneprofile =  dialog.findViewById(R.id.changeprofile);
+        changepass.setOnClickListener(v -> startActivity(new Intent(getContext(), ChangePassActivity.class)));
+        chaneprofile.setOnClickListener(v -> startActivity(new Intent(getContext(), EditProfileActivity.class)));
+
         logoutbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -120,6 +150,20 @@ public class ProfileFragment extends Fragment {
             }
 
         });
+
+        btnClose.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+            }
+        });
+
+        dialog.show();
+    }
+    private void addEvents() {
+        showInfor();// hien thông tin cua tài khoan
+        setAvatarImage();
+
     }
 
     private void showInfor(){
@@ -136,6 +180,11 @@ public class ProfileFragment extends Fragment {
                 txtStudentCode.setText("Tên tài khoản: "+studentCode);
                 txtSpecialized.setText("Chi tiết: "+user.getSpecialized());
                 txtEmail.setText("Email: "+email);
+                if(user.getAvatar().equals("default")){
+                    civAvatar.setImageResource(R.drawable.img_avatar_default);
+                }else{
+                    Glide.with(getContext()).load(user.getAvatar()).into(civAvatar);
+                }
             }
             @Override
             public void onCancelled(@NonNull DatabaseError error) {

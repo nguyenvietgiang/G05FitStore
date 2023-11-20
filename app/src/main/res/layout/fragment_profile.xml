@@ -1,24 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/background">
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
+
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
                 <ImageButton
-                    android:id="@+id/imbEditProfile"
+                    android:id="@+id/imbOption"
                     android:layout_width="32dp"
                     android:layout_height="32dp"
                     android:layout_alignParentEnd="true"
@@ -26,153 +28,139 @@
                     android:layout_marginTop="10dp"
                     android:layout_marginEnd="10dp"
                     android:layout_marginBottom="10dp"
-                    android:background="@drawable/neumorphism_fab_button"
                     android:src="@drawable/ic_settings" />
+
                 <de.hdodenhof.circleimageview.CircleImageView
                     android:id="@+id/civAvatarProfile"
                     android:layout_width="100dp"
                     android:layout_height="100dp"
-                    android:src="@drawable/img_avatar_default"
-                    app:civ_border_width="2dp"
-                    app:civ_border_color="@color/item"
                     android:layout_centerHorizontal="true"
-                    android:layout_marginTop="50dp"/>
+                    android:layout_marginTop="50dp"
+                    android:src="@drawable/img_avatar_default"
+                    app:civ_border_color="@color/item"
+                    app:civ_border_width="2dp" />
             </RelativeLayout>
-            <RelativeLayout
+
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_marginTop="20dp">
+
                 <TextView
                     android:id="@+id/txtName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="User Name"
-                    android:textSize="32dp"
-                    android:layout_marginTop="22dp"
-                    android:layout_centerHorizontal="true"
+                    android:layout_marginRight="5dp"
                     android:gravity="center"
+                    android:text="User Name"
                     android:textColor="@color/color_171717"
-                    android:layout_marginRight="5dp"/>
+                    android:textSize="32dp" />
+
                 <ImageView
                     android:layout_width="25dp"
                     android:layout_height="25dp"
-                    android:layout_marginTop="25dp"
                     android:layout_marginRight="5dp"
-                    android:layout_toRightOf="@id/txtName"
-                    android:src="@drawable/ic_badge_check"/>
-            </RelativeLayout>
+                    android:src="@drawable/ic_badge_check" />
+            </LinearLayout>
+
             <TextView
                 android:id="@+id/txtNickName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="'@Username"
-                android:textSize="18dp"
-                android:textColor="@color/secondary_text"
                 android:layout_marginTop="5dp"
+                android:gravity="center"
+                android:text="'@Username"
+                android:textColor="@color/secondary_text"
 
-                android:gravity="center"/>
+                android:textSize="18dp" />
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_marginTop="10dp">
+                android:layout_marginTop="10dp"
+                android:orientation="vertical">
+
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Thông tin cá nhân"
-                    android:textStyle="bold"
-                    android:textColor="@color/primary_text"
                     android:background="@color/secondary_text"
-                    android:padding="10dp"/>
+                    android:padding="10dp"
+                    android:text="Thông tin cá nhân"
+                    android:textColor="@color/white"
+                    android:textStyle="bold" />
+
                 <TextView
                     android:id="@+id/txtAddress"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:padding="10dp"
                     android:text="Địa chỉ: Dong Anh - Ha Noi"
-                    android:textColor="@color/primary_text"
-                    android:padding="10dp"/>
+                    android:textColor="@color/primary_text" />
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_marginTop="10dp">
+                android:layout_marginTop="10dp"
+                android:orientation="vertical">
+
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Thông tin chi tiết"
-                    android:textStyle="bold"
-                    android:textColor="@color/primary_text"
                     android:background="@color/secondary_text"
-                    android:padding="10dp"/>
+                    android:padding="10dp"
+                    android:text="Thông tin chi tiết"
+                    android:textColor="@color/white"
+                    android:textStyle="bold" />
+
                 <TextView
                     android:id="@+id/txtStudentCode"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:padding="10dp"
                     android:text="Số điện thoại: 0946783295"
-                    android:textColor="@color/primary_text"
-                    android:padding="10dp"/>
+                    android:textColor="@color/primary_text" />
+
                 <TextView
                     android:id="@+id/txtClassName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:padding="10dp"
                     android:text="Class: 1910A04"
-                    android:textColor="@color/primary_text"
-                    android:padding="10dp"/>
+                    android:textColor="@color/primary_text" />
+
                 <TextView
                     android:id="@+id/txtSpecialized"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:padding="10dp"
                     android:text="learning status: năm 5"
-                    android:textColor="@color/primary_text"
-                    android:padding="10dp"/>
+                    android:textColor="@color/primary_text" />
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_marginTop="10dp">
+                android:layout_marginTop="10dp"
+                android:orientation="vertical">
+
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Liên hệ"
-                    android:textStyle="bold"
-                    android:textColor="@color/primary_text"
                     android:background="@color/secondary_text"
-                    android:padding="10dp"/>
+                    android:padding="10dp"
+                    android:text="Liên hệ"
+                    android:textColor="@color/white"
+                    android:textStyle="bold" />
+
                 <TextView
                     android:id="@+id/txtEmail"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:padding="10dp"
                     android:text="Email: username@gmail.com"
-                    android:textColor="@color/primary_text"
-                    android:padding="10dp"/>
-                <Button
-                    android:id="@+id/changeprofile"
-                    android:layout_marginTop="15px"
-                    android:layout_marginBottom="20dp"
-                    android:layout_width="150dp"
-                    android:layout_height="wrap_content"
-                    android:backgroundTint="#9C27B0"
-                    android:text="Đổi thông tin"
-                    android:layout_gravity="center_horizontal" />
-
-                <Button
-                    android:id="@+id/changepass"
-                    android:layout_marginTop="15px"
-                    android:layout_marginBottom="20dp"
-                    android:layout_width="150dp"
-                    android:layout_height="wrap_content"
-                    android:backgroundTint="#4fc4f3"
-                    android:text="Đổi mật khẩu"
-                    android:layout_gravity="center_horizontal" />
-
-                <Button
-                    android:id="@+id/logoutbtn"
-                    android:layout_width="150dp"
-                    android:layout_height="wrap_content"
-                    android:backgroundTint="#E40D56"
-                    android:text="Đăng xuất"
-                    android:layout_gravity="center_horizontal" />
+                    android:textColor="@color/primary_text" />
 
             </LinearLayout>
         </LinearLayout>
