@@ -180,10 +180,12 @@ public class ProfileFragment extends Fragment {
                 txtStudentCode.setText("Tên tài khoản: "+studentCode);
                 txtSpecialized.setText("Chi tiết: "+user.getSpecialized());
                 txtEmail.setText("Email: "+email);
-                if(user.getAvatar().equals("default")){
-                    civAvatar.setImageResource(R.drawable.img_avatar_default);
-                }else{
+                if (user.getAvatar() != null && !user.getAvatar().equals("default")) {
+                    // Nếu có ảnh và không phải là ảnh mặc định, sử dụng Glide để tải ảnh
                     Glide.with(getContext()).load(user.getAvatar()).into(civAvatar);
+                } else {
+                    // Nếu không có ảnh hoặc là ảnh mặc định, sử dụng ảnh mặc định
+                    civAvatar.setImageResource(R.drawable.img_avatar_default);
                 }
             }
             @Override

@@ -31,17 +31,6 @@
             android:padding="16dp"
             android:text="Tổng: "
             android:textSize="20sp" />
-
-        <Button
-            android:id="@+id/payment_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginEnd="20dp"
-            android:backgroundTint="@color/second_background"
-            android:text="Thanh toán"
-            android:textColor="@color/white"
-            app:cornerRadius="8dp" />
     </LinearLayout>
 
 </LinearLayout>
