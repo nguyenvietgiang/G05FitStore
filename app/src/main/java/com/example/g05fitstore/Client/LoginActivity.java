@@ -30,6 +30,8 @@ public class LoginActivity extends AppCompatActivity {
     ProgressBar progressBar;
     TextView textView;
 
+    int loginAttempts = 0; //biến đếm số lần đăng nhập sai
+
     @Override
     public void onStart() {
         super.onStart();
@@ -84,15 +86,25 @@ public class LoginActivity extends AppCompatActivity {
                             public void onComplete(@NonNull Task<AuthResult> task) {
                                 progressBar.setVisibility(View.GONE);
                                 if (task.isSuccessful()) {
+                                    loginAttempts = 0; // Reset the counter on successful login
                                     Toast.makeText(LoginActivity.this, "Đăng nhập thành công",
                                             Toast.LENGTH_SHORT).show();
                                     Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                                     startActivities(new Intent[]{intent});
                                     finish();
                                 } else {
-                                    // If sign in fails, display a message to the user.
-                                    Toast.makeText(LoginActivity.this, "Sai tên email hoặc mật khẩu",
-                                            Toast.LENGTH_SHORT).show();
+                                    // If sign-in fails, display a message to the user.
+                                    loginAttempts++;
+                                    if (loginAttempts == 5) {
+                                        Toast.makeText(LoginActivity.this, "Sai tên email hoặc mật khẩu. Đăng nhập thất bại 5 lần. Hãy đăng ký!",
+                                                Toast.LENGTH_SHORT).show();
+                                        Intent intent = new Intent(getApplicationContext(), RegisterActivity.class);
+                                        startActivities(new Intent[]{intent});
+                                        finish();
+                                    } else {
+                                        Toast.makeText(LoginActivity.this, "Sai tên email hoặc mật khẩu",
+                                                Toast.LENGTH_SHORT).show();
+                                    }
                                 }
                             }
                         });

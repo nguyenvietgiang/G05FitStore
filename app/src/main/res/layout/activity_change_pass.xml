@@ -45,7 +45,8 @@
 <!--                android:padding="8dp"-->
 <!--                android:textColor="@color/color_171717"-->
 <!--                android:textColorHighlight="@color/cardview_dark_background"-->
-<!--                android:layout_marginTop="40dp"/>-->
+<!--                android:layout_marginTop="40dp"-->
+<!--               />-->
 
             <EditText
                 android:layout_width="match_parent"
@@ -69,7 +70,8 @@
 <!--                android:inputType="textPassword"-->
 <!--                android:textColor="@color/color_171717"-->
 <!--                android:textColorHighlight="@color/cardview_dark_background"-->
-<!--                android:layout_marginTop="20dp"/>-->
+<!--                android:layout_marginTop="20dp"-->
+<!--                />-->
 
             <Button
                 android:layout_width="match_parent"

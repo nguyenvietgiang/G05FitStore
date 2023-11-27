@@ -27,6 +27,7 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.example.g05fitstore.Client.ChangePassActivity;
 import com.example.g05fitstore.Client.EditProfileActivity;
+import com.example.g05fitstore.Client.FeedbackActivity;
 import com.example.g05fitstore.Client.LoginActivity;
 import com.example.g05fitstore.Models.User;
 import com.example.g05fitstore.R;
@@ -57,7 +58,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class ProfileFragment extends Fragment {
     View viewProfile;
-    Button logoutbtn, changepass , chaneprofile, btnClose;
+    Button logoutbtn, changepass , chaneprofile, btnClose, sendfb;
     CircleImageView civAvatar;
     TextView txtName, txtNickName, txtStudentCode, txtClassName;
     TextView txtAddress, txtSpecialized, txtEmail;
@@ -117,14 +118,15 @@ public class ProfileFragment extends Fragment {
         windowAttributes.gravity = Gravity.CENTER;
         window.setAttributes(windowAttributes);
         dialog.setCancelable(true);
-
+        // gán các điều khiển trong dialog
         btnClose = dialog.findViewById(R.id.btn_closeOption);
         logoutbtn = dialog.findViewById(R.id.logoutbtn);
         changepass = dialog.findViewById(R.id.changepass);
         chaneprofile =  dialog.findViewById(R.id.changeprofile);
+        sendfb = dialog.findViewById(R.id.sendFeedback);
         changepass.setOnClickListener(v -> startActivity(new Intent(getContext(), ChangePassActivity.class)));
         chaneprofile.setOnClickListener(v -> startActivity(new Intent(getContext(), EditProfileActivity.class)));
-
+        sendfb.setOnClickListener(v -> startActivity(new Intent(getContext(), FeedbackActivity.class)));
         logoutbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

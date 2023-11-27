@@ -197,7 +197,9 @@ public class ProductFragment extends Fragment {
                                     String image = uri.toString();
                                     String desc = etDescAdd.getText().toString().trim();
                                     Integer price = Integer.parseInt(etpriceAdd.getText().toString().trim());
-                                    Product product = new Product(id, userId, name, image, desc,price);
+                                    String timestamp = String.valueOf(System.currentTimeMillis());
+                                    // Thêm thời gian hiện tại của thiết bị vào đối tượng Product
+                                    Product product = new Product(id, userId, name, image, desc, price, timestamp);
 
                                     String pathObject = String.valueOf(product.getId());
                                     productRef.child(pathObject).setValue(product, new DatabaseReference.CompletionListener() {

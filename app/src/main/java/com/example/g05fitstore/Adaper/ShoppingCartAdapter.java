@@ -140,6 +140,8 @@ public class ShoppingCartAdapter extends RecyclerView.Adapter<ShoppingCartAdapte
         });
     }
 
+
+
     public static class ViewHolder extends RecyclerView.ViewHolder {
         TextView ProductNameTextView;
         TextView ProductPriceTextView;

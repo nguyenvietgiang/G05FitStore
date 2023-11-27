@@ -17,6 +17,7 @@
         android:layout_marginStart="10dp"
         android:layout_marginTop="10dp"
         android:layout_marginEnd="10dp"
+        android:visibility="gone"
         android:layout_marginBottom="10dp">
 
         <EditText
@@ -51,8 +52,33 @@
 
             android:src="@drawable/search_icon"
             app:tint="@color/color_171717" />
-
     </RelativeLayout>
+
+<!--    <LinearLayout-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:orientation="horizontal"-->
+<!--        android:layout_marginStart="10dp"-->
+<!--        android:layout_marginTop="10dp"-->
+<!--        android:layout_marginEnd="10dp"-->
+<!--        android:layout_marginBottom="10dp">-->
+
+<!--        <EditText-->
+<!--            android:id="@+id/edtMinPrice"-->
+<!--            android:layout_width="0dp"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_weight="1"-->
+<!--            android:hint="Giá thấp nhất"-->
+<!--            android:inputType="number"/>-->
+
+<!--        <EditText-->
+<!--            android:id="@+id/edtMaxPrice"-->
+<!--            android:layout_width="0dp"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_weight="1"-->
+<!--            android:hint="Giá cao nhất"-->
+<!--            android:inputType="number"/>-->
+<!--    </LinearLayout>-->
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_view"
@@ -60,5 +86,4 @@
         android:layout_height="match_parent"
         tools:listitem="@layout/item_home_product"
         android:layout_marginBottom="20dp"/>
-
 </LinearLayout>

@@ -11,15 +11,16 @@ public class Product {
     private String image;
     private String desc;
     private Integer price;
+    private String timestamp;
 
-
-    public Product(String id, String userId, String name, String image, String desc, Integer price) {
+    public Product(String id, String userId, String name, String image, String desc, Integer price, String timestamp) {
         this.id = id;
         this.userId = userId;
         this.name = name;
         this.image = image;
         this.desc = desc;
         this.price = price;
+        this.timestamp = timestamp;
     }
 
 
@@ -76,12 +77,21 @@ public class Product {
         this.price = price;
     }
 
+    public String getTimestamp() {
+        return timestamp;
+    }
+
+    public void setTimestamp(String timestamp) {
+        this.timestamp = timestamp;
+    }
+
     public Map<String, Object> toMap() {
         HashMap<String, Object> result = new HashMap<>();
         result.put("name", name);
         result.put("desc", desc);
         result.put("image", image);
-        result.put("price",price);
+        result.put("price", price);
+        result.put("timestamp", timestamp);
         return result;
     }
 }

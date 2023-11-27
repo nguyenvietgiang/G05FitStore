@@ -65,6 +65,48 @@ public class ChangePassActivity extends AppCompatActivity {
         builder.show();
     }
 
+    // kiểm tra mật khẩu cũ
+//    private void showConfirmationDialog() {
+//        AlertDialog.Builder builder = new AlertDialog.Builder(ChangePassActivity.this);
+//        builder.setTitle("Xác nhận thay đổi mật khẩu");
+//        builder.setMessage("Bạn có chắc chắn muốn thay đổi mật khẩu không?");
+//        builder.setPositiveButton("Đồng ý", new DialogInterface.OnClickListener() {
+//            @Override
+//            public void onClick(DialogInterface dialog, int which) {
+//                // Lấy mật khẩu hiện tại từ người dùng
+//                String currentPassword = currentPass.getText().toString();
+//
+//                // Lấy đối tượng FirebaseUser
+//                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+//
+//                // Tạo một đối tượng AuthCredential để xác thực lại người dùng
+//                AuthCredential credential = EmailAuthProvider.getCredential(user.getEmail(), currentPassword);
+//
+//                // Reauthenticate người dùng với mật khẩu hiện tại
+//                user.reauthenticate(credential)
+//                        .addOnCompleteListener(new OnCompleteListener<Void>() {
+//                            @Override
+//                            public void onComplete(@NonNull Task<Void> task) {
+//                                if (task.isSuccessful()) {
+//                                    // Xác thực thành công, tiến hành đổi mật khẩu
+//                                    changePassword();
+//                                } else {
+//                                    // Xác thực không thành công, hiển thị thông báo lỗi
+//                                    Toast.makeText(ChangePassActivity.this, "Mật khẩu hiện tại không đúng", Toast.LENGTH_SHORT).show();
+//                                }
+//                            }
+//                        });
+//            }
+//        });
+//        builder.setNegativeButton("Hủy bỏ", new DialogInterface.OnClickListener() {
+//            @Override
+//            public void onClick(DialogInterface dialog, int which) {
+//                dialog.dismiss();
+//            }
+//        });
+//        builder.show();
+//    }
+
     private void changePassword(){
         String newPassword = newPass.getText().toString();
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();

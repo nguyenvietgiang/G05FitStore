@@ -72,6 +72,7 @@ public class CartFragment extends Fragment implements ICartSum {
                 }
 
                 shoppingCartAdapter.notifyDataSetChanged();
+                updateItemCountTextView();
 //                // Kiểm tra nếu transactionList đã được cập nhật, sau đó tính tổng
 //                if (!transactionList.isEmpty()) {
 //                    double totalAmount = shoppingCartAdapter.getTotalAmount();
@@ -90,5 +91,11 @@ public class CartFragment extends Fragment implements ICartSum {
     public void cartSum() {
         double totalAmount = shoppingCartAdapter.getTotalAmount();
         totalAmountTextView.setText(String.valueOf(totalAmount));
+    }
+
+    private void updateItemCountTextView() {
+        int itemCount = shoppingCartAdapter.getItemCount();
+        TextView itemCountTextView = getView().findViewById(R.id.cart_count_text_view);
+        itemCountTextView.setText("Số lượng: " + itemCount);
     }
 }
